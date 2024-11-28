@@ -31,13 +31,13 @@ describe('Central de Atendimento ao Cliente TAT', () => {
         }
 
         cy.get(campos.nome)
-            .type(preenchimentos.nome);
+            .type(preenchimentos.nome, {delay: 0});
         cy.get(campos.sobrenome)
-            .type(preenchimentos.sobrenome);
+            .type(preenchimentos.sobrenome, {delay: 0});
         cy.get(campos.email)
-            .type(preenchimentos.email);
+            .type(preenchimentos.email, {delay: 0});
         cy.get(campos.desc)
-            .type(preenchimentos.desc);
+            .type(preenchimentos.desc, {delay: 0});
 
         cy.get('button[type="submit"]').click();
 
