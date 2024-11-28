@@ -31,13 +31,13 @@ describe('Central de Atendimento ao Cliente TAT', () => {
         }
 
         cy.get(campos.nome)
-            .type(preenchimentos.nome, {delay: 0});
+            .type(preenchimentos.nome, { delay: 0 });
         cy.get(campos.sobrenome)
-            .type(preenchimentos.sobrenome, {delay: 0});
+            .type(preenchimentos.sobrenome, { delay: 0 });
         cy.get(campos.email)
-            .type(preenchimentos.email, {delay: 0});
+            .type(preenchimentos.email, { delay: 0 });
         cy.get(campos.desc)
-            .type(preenchimentos.desc, {delay: 0});
+            .type(preenchimentos.desc, { delay: 0 });
 
         cy.get('button[type="submit"]').click();
 
@@ -52,7 +52,35 @@ describe('Central de Atendimento ao Cliente TAT', () => {
         cy.get('span[class="error"]').should('be.visible')
     })
 
-    it('verifica se campo de telefone aceita somente números', () => {
+    it('campo de telefone aceita somente números', () => {
         cy.get('#phone').type('valor não numérico').should('be.empty')
+    })
+
+    it('exibe mensagem de erro ao submeter o formulário com campo de telefone sendo obrigatorio porém vazio', () => {
+        const campos = {
+            nome: '#firstName',
+            sobrenome: '#lastName',
+            email: '#email',
+            desc: '#open-text-area'
+        }
+        const preenchimentos = {
+            nome: 'Pedro',
+            sobrenome: 'Ribeiro',
+            email: 'pedro.ribeiro@narwalsistemas.com.br',
+            desc: 'Meu computador está lento, preciso de uma nova placa de vídeo com pelo menos 8gb VRAM GDDR6.'
+        }
+
+        cy.get(campos.nome)
+            .type(preenchimentos.nome, { delay: 0 });
+        cy.get(campos.sobrenome)
+            .type(preenchimentos.sobrenome, { delay: 0 });
+        cy.get(campos.email)
+            .type(preenchimentos.email, { delay: 0 });
+        cy.get(campos.desc)
+            .type(preenchimentos.desc, { delay: 0 });
+
+        cy.get('#phone-checkbox').check();
+        cy.get('button[type="submit"]').click();
+        cy.get('span[class="error"]').should('be.visible')
     })
 })
