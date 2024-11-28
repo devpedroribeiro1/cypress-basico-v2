@@ -16,7 +16,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
         cy.title().should('eq', 'Central de Atendimento ao Cliente TAT');
     })
 
-    it('preenche os campos obrigatórios e envia o formulário', async () => {
+    it('preenche os campos obrigatórios e envia o formulário', () => {
         const campos = {
             nome: '#firstName',
             sobrenome: '#lastName',
@@ -44,5 +44,11 @@ describe('Central de Atendimento ao Cliente TAT', () => {
         cy.get('span[class="success"]').should('be.visible')
 
 
+    })
+
+    it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', () => {
+        cy.get('button[type="submit"]').click();
+
+        cy.get('span[class="error"]').should('be.visible')
     })
 })
