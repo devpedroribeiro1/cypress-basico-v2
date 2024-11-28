@@ -51,4 +51,8 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
         cy.get('span[class="error"]').should('be.visible')
     })
+
+    it('verifica se campo de telefone aceita somente números', () => {
+        cy.get('#phone').type('valor não numérico').should('be.empty')
+    })
 })
