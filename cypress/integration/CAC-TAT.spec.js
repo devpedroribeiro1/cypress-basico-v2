@@ -153,4 +153,15 @@ describe('Central de Atendimento ao Cliente TAT', () => {
                     .should('be.checked')
             })
     })
+
+    it('marca ambos checkboxes, depois desmarca o último', () => {
+        cy.get('input[type="checkbox"]')
+        .should('have.length', 2)
+        .each((element) => {
+            cy.wrap(element).check()
+            .should('be.checked')
+        })
+        .last().uncheck()
+        .should('not.be.checked')
+    })
 })
