@@ -83,4 +83,36 @@ describe('Central de Atendimento ao Cliente TAT', () => {
         cy.get('button[type="submit"]').click();
         cy.get('span[class="error"]').should('be.visible')
     })
+
+    it('preenche e limpa os campos nome, sobrenome, email e telefone', () => {
+        const campos = {
+            nome: '#firstName',
+            sobrenome: '#lastName',
+            email: '#email',
+            desc: '#open-text-area'
+        }
+        const preenchimentos = {
+            nome: 'Pedro',
+            sobrenome: 'Ribeiro',
+            email: 'pedro.ribeiro@narwalsistemas.com.br',
+            desc: 'Meu computador está lento, preciso de uma nova placa de vídeo com pelo menos 8gb VRAM GDDR6.'
+        }
+
+        cy.get(campos.nome)
+            .type(preenchimentos.nome, { delay: 0 })
+            .should('have.value', preenchimentos.nome)
+            .clear().should('have.value', '')
+        cy.get(campos.sobrenome)
+            .type(preenchimentos.sobrenome, { delay: 0 })
+            .should('have.value', preenchimentos.sobrenome)
+            .clear().should('have.value', '')
+        cy.get(campos.email)
+            .type(preenchimentos.email, { delay: 0 })
+            .should('have.value', preenchimentos.email)
+            .clear().should('have.value', '')
+        cy.get(campos.desc)
+            .type(preenchimentos.desc, { delay: 0 })
+            .should('have.value', preenchimentos.desc)
+            .clear().should('have.value', '')
+    })
 })
