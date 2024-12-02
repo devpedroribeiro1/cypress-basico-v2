@@ -119,11 +119,23 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
         cy.contains('button', 'Enviar')
             .click();
-        cy.get('span[class="error"]').should('be.visible');""
+        cy.get('span[class="error"]').should('be.visible'); ""
     })
 
     it('envia o formuário com sucesso usando um comando customizado', () => {
         cy.fillMandatoryFieldsAndSubmit('Pedro', 'Ribeiro', 'pedro.ribeiro@nwl.com', 'Meu pc está lento. Preciso de mais RGB!')
         cy.get('span[class="success"]').should('be.visible')
+    })
+
+    it('seleciona um produto (YouTube) por seu texto', () => {
+        cy.get('#product')
+            .select('youtube')
+            .should('have.value', 'youtube');
+    })
+
+    it('seleciona um prduto (Mentoria) por seu texto', () => {
+        cy.get('#product')
+            .select('mentoria')
+            .should('have.value', 'mentoria');
     })
 })
