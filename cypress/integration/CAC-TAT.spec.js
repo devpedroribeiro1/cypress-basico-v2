@@ -191,4 +191,21 @@ describe('Central de Atendimento ao Cliente TAT', () => {
                 expect(fileInput[0].files[0].name).to.eq('example')
             })
     })
+
+    it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', () => {
+        cy.get('a[href="privacy.html"]')
+            .should('have.attr', 'target', '_blank')
+    })
+
+    it('acessa a página da política de privacidade removendo o target e então clicando no link', () => {
+        cy.get('a[href="privacy.html"]')
+            .should('have.attr', 'target', '_blank')
+            .invoke('removeAttr', 'target')
+            .click()
+    })
+
+    it('testa a página da política de privacidade de forma independente', () => {
+        cy.visit('../../src/privacy.html')
+            .title().should('eq', 'Central de Atendimento ao Cliente TAT - Política de privacidade')
+    })
 })
