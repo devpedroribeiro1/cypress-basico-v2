@@ -47,9 +47,11 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     })
 
     it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', () => {
+        cy.clock()
         cy.contains('button', 'Enviar').click();
-
         cy.get('span[class="error"]').should('be.visible')
+        cy.tick(3001)
+        cy.get('span[class="error"]').should('not.be.visible')
     })
 
     it('campo de telefone aceita somente números', () => {
@@ -80,8 +82,11 @@ describe('Central de Atendimento ao Cliente TAT', () => {
             .type(preenchimentos.desc, { delay: 0 });
 
         cy.get('#phone-checkbox').check();
+        cy.clock()
         cy.contains('button', 'Enviar').click();
         cy.get('span[class="error"]').should('be.visible')
+        cy.tick(3001)
+        cy.get('span[class="error"]').should('not.be.visible')
     })
 
     it('preenche e limpa os campos nome, sobrenome, email e telefone', () => {
@@ -117,9 +122,11 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     })
 
     it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
-        cy.contains('button', 'Enviar')
-            .click();
-        cy.get('span[class="error"]').should('be.visible'); ""
+        cy.clock()
+        cy.contains('button', 'Enviar').click();
+        cy.get('span[class="error"]').should('be.visible')
+        cy.tick(3001)
+        cy.get('span[class="error"]').should('not.be.visible')
     })
 
     it('envia o formuário com sucesso usando um comando customizado', () => {
