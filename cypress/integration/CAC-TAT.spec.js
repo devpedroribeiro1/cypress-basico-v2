@@ -215,4 +215,32 @@ describe('Central de Atendimento ao Cliente TAT', () => {
         cy.visit('../../src/privacy.html')
             .title().should('eq', 'Central de Atendimento ao Cliente TAT - Política de privacidade')
     })
+
+    it('exibe e esconde as mensagens de sucesso e erro usando o .invoke()', () => {
+        cy.get('.success')
+            .should('not.be.visible')
+            .invoke('show')
+            .should('be.visible')
+            .and('contain', 'Mensagem enviada com sucesso.')
+            .invoke('hide')
+            .should('not.be.visible')
+        cy.get('.error')
+            .should('not.be.visible')
+            .invoke('show')
+            .should('be.visible')
+            .and('contain', 'Valide os campos obrigatórios!')
+            .invoke('hide')
+            .should('not.be.visible')
+    })
+
+    it.only('faz uma requisição HTTP', () => {
+        cy.request({
+            method: 'get',
+            url: 'https://cac-tat.s3.eu-central-1.amazonaws.com/index.html'
+        }).then((res) => {
+            expect(res.status).to.be.eq(200)
+            expect(res.body).include('CAC TAT')
+        })
+
+    })
 })
