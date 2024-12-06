@@ -1,8 +1,11 @@
-name: End-to-end tests 🧪
-on: [push]
+name: End to End tests 🏋️🦾
+on: push
 jobs:
-  cypress-run:
-    runs-on: ubuntu-20.04
+  Run tests:
+    runs-on: ubuntu@latest
     steps:
-      - uses: actions/checkout@v4
-      - run: echo "Fazendo checkout"
+      - name: Fetching Repo
+        uses: actions/checkout@v4
+      
+      - name: Run Cypress
+        uses: cypress-io/github-action@v6
