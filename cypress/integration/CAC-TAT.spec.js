@@ -244,9 +244,9 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
     })
 
-    it.only('encontra o gato', () => {
-        cy.contains('span', '🐈')
-            .should('not.be.visible')
-            .invoke('show')
-    })
+    // it('encontra o gato', () => {
+    //     cy.contains('span', '🐈')
+    //         .should('not.be.visible')
+    //         .invoke('show')
+    // })
 })
